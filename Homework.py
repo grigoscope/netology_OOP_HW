@@ -1,5 +1,5 @@
 class Student:
-    '''Student class'''
+    '''Student class.'''
     def __init__(self, name, surname):
         self.name = name
         self.surname = surname
@@ -15,7 +15,7 @@ class Student:
                 f"Завершённые курсы: {', '.join(self.finished_courses)}\n")
 
     def _average_rate(self, grades: dict):
-        '''Average students's rate calculator function'''
+        '''Average students's rate calculator function.'''
         sum_ = 0
         for course in grades:
             sum_ += sum(grades[course]) / len(grades[course])
@@ -32,14 +32,14 @@ class Student:
 
 
 class Mentor:
-    '''Mentor class'''
+    '''Mentor class.'''
     def __init__(self, name, surname):
         self.name = name
         self.surname = surname
         self.courses_attached = []
 
     def rate_hw(self, student, course, grade):
-        '''Rate student's homework method in certain course'''
+        '''Rate student's homework method in certain course.'''
         if isinstance(student, Student) and course in self.courses_attached and course in student.courses_in_progress:
             if course in student.grades:
                 student.grades[course] += [grade]
@@ -50,7 +50,7 @@ class Mentor:
 
 
 class Lecturer(Mentor):
-    '''Lecturer class'''
+    '''Lecturer class.'''
     def __init__(self, name, surname):
         super().__init__(name, surname)
         self.grades = {} 
@@ -61,7 +61,7 @@ class Lecturer(Mentor):
                 f'Средняя оценка за лекции: {self._average_rate(self.grades)}\n')
 
     def _average_rate(self, grades: dict):
-        '''Average lecturer's rate calculator function'''
+        '''Average lecturer's rate calculator function.'''
         sum_ = 0
         for course in grades:
             sum_ += sum(grades[course]) / len(grades[course])
@@ -69,7 +69,7 @@ class Lecturer(Mentor):
 
 
 class Reviewer(Mentor):
-    '''Reviewer class'''
+    '''Reviewer class.'''
     def __init__(self, name, surname):
         super().__init__(name, surname)
 
@@ -78,12 +78,12 @@ class Reviewer(Mentor):
                 f"Фамилия: {self.surname}\n")
 
     def rate_hw(self, student, course, grade):
-        ''''Rate student's homework in certain course'''
+        ''''Rate student's homework in certain course.'''
         return super().rate_hw(student, course, grade)
 
 
 def students_average_rate(students : list, course):
-    '''Average homework rate of every student of certain course'''
+    '''Average homework rate of every student of certain course.'''
     average_rate = 0
 
     for student in students:
