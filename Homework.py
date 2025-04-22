@@ -10,11 +10,11 @@ class Student:
     def __str__(self):
         return (f"Имя: {self.name} \n"
                 f"Фамилия: {self.surname} \n"
-                f"Средняя оценка за домашнее задание: {self.__average_rate(self.grades)} \n"
+                f"Средняя оценка за домашнее задание: {self._average_rate(self.grades)} \n"
                 f"Курсы в процессе изучения: {', '.join(self.courses_in_progress)} \n"
                 f"Завершённые курсы: {', '.join(self.finished_courses)}\n")
 
-    def __average_rate(self, grades: dict):
+    def _average_rate(self, grades: dict):
         '''Average students's rate calculator function'''
         sum_ = 0
         for course in grades:
@@ -47,7 +47,7 @@ class Mentor:
                 student.grades[course] = [grade]
         else:
             return "Error"
-        
+
 
 class Lecturer(Mentor):
     '''Lecturer class'''
@@ -58,14 +58,15 @@ class Lecturer(Mentor):
     def __str__(self):
         return (f'Имя: {self.name} \n'
                 f'Фамилия: {self.surname} \n'
-                f'Средняя оценка за лекции: {self.__average_rate(self.grades)}\n')
+                f'Средняя оценка за лекции: {self._average_rate(self.grades)}\n')
 
-    def __average_rate(self, grades: dict):
+    def _average_rate(self, grades: dict):
         '''Average lecturer's rate calculator function'''
         sum_ = 0
         for course in grades:
             sum_ += sum(grades[course]) / len(grades[course])
         return round(sum_ / len(grades), 1)
+
 
 class Reviewer(Mentor):
     '''Reviewer class'''
@@ -110,6 +111,7 @@ def lectors_average_rate(lecturers : list, course):
         else:
             return f"Error: object {lecturer} isn't instance of class 'Lectorer'"
     return round(average_rate / len(lecturers), 1)
+
 
 # First student
 stud_1 = Student("Ruoy", "Eman")
