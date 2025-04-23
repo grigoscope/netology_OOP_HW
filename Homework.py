@@ -14,6 +14,21 @@ class Student:
                 f"Курсы в процессе изучения: {', '.join(self.courses_in_progress)} \n"
                 f"Завершённые курсы: {', '.join(self.finished_courses)}\n")
 
+    def __eq__(self, other):
+        return isinstance(other, Lecturer) and self._average_rate(self.grades) == other._average_rate(other.grades)
+
+    def __lt__(self, other):
+        return isinstance(other, Lecturer) and self._average_rate(self.grades) < other._average_rate(other.grades)
+
+    def __gt__(self, other):
+        return isinstance(other, Lecturer) and self._average_rate(self.grades) > other._average_rate(self.grades)
+
+    def __le__(self, other):
+        return isinstance(other, Lecturer) and self._average_rate(self.grades) <= other._average_rate(self.grades)
+
+    def __ge__(self, other):
+        return isinstance(other, Lecturer) and self._average_rate(self.grades) >= other._average_rate(self.grades)
+
     def _average_rate(self, grades: dict):
         '''Average students's rate calculator function.'''
         sum_ = 0
@@ -54,6 +69,21 @@ class Lecturer(Mentor):
     def __init__(self, name, surname):
         super().__init__(name, surname)
         self.grades = {} 
+
+    def __eq__(self, other):
+        return isinstance(other, Student) and self._average_rate(self.grades) == other._average_rate(other.grades)
+
+    def __lt__(self, other):
+        return isinstance(other, Student) and self._average_rate(self.grades) < other._average_rate(other.grades)
+
+    def __gt__(self, other):
+        return isinstance(other, Student) and self._average_rate(self.grades) > other._average_rate(self.grades)
+
+    def __le__(self, other):
+        return isinstance(other, Student) and self._average_rate(self.grades) <= other._average_rate(self.grades)
+
+    def __ge__(self, other):
+        return isinstance(other, Student) and self._average_rate(self.grades) >= other._average_rate(self.grades)
 
     def __str__(self):
         return (f'Имя: {self.name} \n'
@@ -113,6 +143,34 @@ def lectors_average_rate(lecturers : list, course):
     return round(average_rate / len(lecturers), 1)
 
 
+def eq_test(stud : Student, lect : Lecturer):
+    '''Check if average mark of student and lecturer are equal.'''
+    print(f"Average mark of student {stud.name} {stud.surname} " 
+      f"and lecturer {lect.name} {lect.surname} are", \
+      f"equal" if stud == lect else "not equal")
+
+
+def lt_test(stud : Student, lect : Lecturer):
+    '''Check if average mark of student less than average mark of lecturer.'''
+    check_string = "less than" if stud < lect else "not less than"
+    print(f"Average mark of student {stud.name} {stud.surname} {check_string} mark of lecturer {lect.name} {lect.surname}")
+
+
+def gt_test(stud : Student, lect : Lecturer):
+    '''Check if average mark of student greater than average mark of lecturer.'''
+    check_string = "greater than" if stud > lect else "not greater than"
+    print(f"Average mark of student {stud.name} {stud.surname} {check_string} mark of lecturer {lect.name} {lect.surname}")
+
+def le_test(stud : Student, lect : Lecturer):
+    '''Check if average mark of student less or equal than average mark of lecturer.'''
+    check_string = "less or equal" if stud <= lect else "not less or equal"
+    print(f"Average mark of student {stud.name} {stud.surname} {check_string} mark of lecturer {lect.name} {lect.surname}")
+
+def ge_test(stud : Student, lect : Lecturer):
+    '''Check if average mark of student greater or equal than average mark of lecturer.'''
+    check_string = "greater or equal than" if stud > lect else "not greater or equal than"
+    print(f"Average mark of student {stud.name} {stud.surname} {check_string} mark of lecturer {lect.name} {lect.surname}")
+
 # First student
 stud_1 = Student("Ruoy", "Eman")
 stud_1.courses_in_progress += ["Python", "Git"]
@@ -152,6 +210,33 @@ print(rev_1)
 # Second reviewer
 rev_2 = Reviewer("Igor", "Vikrorov")
 print(rev_2)
+
+# Comparsion methods test
+eq_test(stud_1, lect_1)
+eq_test(stud_2, lect_1)
+eq_test(stud_1, lect_2)
+eq_test(stud_2, lect_2)
+print("\t")
+lt_test(stud_1, lect_1)
+lt_test(stud_2, lect_1)
+lt_test(stud_1, lect_2)
+lt_test(stud_2, lect_2)
+print("\t")
+gt_test(stud_1, lect_1)
+gt_test(stud_2, lect_1)
+gt_test(stud_1, lect_2)
+gt_test(stud_2, lect_2)
+print("\t")
+le_test(stud_1, lect_1)
+le_test(stud_2, lect_1)
+le_test(stud_1, lect_2)
+le_test(stud_2, lect_2)
+print("\t")
+ge_test(stud_1, lect_1)
+ge_test(stud_2, lect_1)
+ge_test(stud_1, lect_2)
+ge_test(stud_2, lect_2)
+print("\t")
 
 # Average homework rate of every student of certain course
 stud_list = [stud_1, stud_2]
