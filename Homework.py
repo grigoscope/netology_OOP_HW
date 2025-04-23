@@ -128,7 +128,6 @@ def students_average_rate(students : list, course):
     
     return round(average_rate / len(students), 1)
 
-
 def lectors_average_rate(lecturers : list, course):
     average_rate = 0
     for lecturer in lecturers:
@@ -142,19 +141,16 @@ def lectors_average_rate(lecturers : list, course):
             return f"Error: object {lecturer} isn't instance of class 'Lectorer'"
     return round(average_rate / len(lecturers), 1)
 
-
 def eq_test(stud : Student, lect : Lecturer):
     '''Check if average mark of student and lecturer are equal.'''
     print(f"Average mark of student {stud.name} {stud.surname} " 
       f"and lecturer {lect.name} {lect.surname} are", \
       f"equal" if stud == lect else "not equal")
 
-
 def lt_test(stud : Student, lect : Lecturer):
     '''Check if average mark of student less than average mark of lecturer.'''
     check_string = "less than" if stud < lect else "not less than"
     print(f"Average mark of student {stud.name} {stud.surname} {check_string} mark of lecturer {lect.name} {lect.surname}")
-
 
 def gt_test(stud : Student, lect : Lecturer):
     '''Check if average mark of student greater than average mark of lecturer.'''
